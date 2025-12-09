@@ -1079,7 +1079,12 @@
             if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 $('#email').css('border-color', '#ccc');
 
+                // Optional: clear previous timer
+                if (window.emailCheckTimer) clearTimeout(window.emailCheckTimer);
 
+                window.emailCheckTimer = setTimeout(() => {
+                    nextStep(2);
+                }, 300);
             } else {
                 // No email or invalid email — stop
                 showError(emailField, "Please enter a valid email address.");
@@ -1497,34 +1502,7 @@
         const typingDelay = 800; // delay in ms (0.8s) after user stops typing
 
         // Debounced email checker
-        $('#email').on('keyup', function() {
-            clearTimeout(typingTimer); // clear previous timer
-            const email = $(this).val();
-            const emailField = document.getElementById("email");
 
-            // only check if email field is not empty
-            if (email.trim() !== '') {
-                typingTimer = setTimeout(() => {
-                    checkEmailExists(email)
-                        .then((exists) => {
-                            console.log(exists);
-                            if (exists) {
-                                $('#email').css('border-color', 'red');
-
-                                showError(emailField, 'This email already exists.');
-                            } else {
-                                $('#email').css('border-color', '#ccc');
-                            }
-                        })
-                        .catch((err) => {
-                            //  showError(emailField,'⚠️ Error checking email');
-                            console.error(err);
-                        });
-                }, typingDelay);
-            } else {
-                $('#emailStatus').text('');
-            }
-        });
         //   function checkEmailExists(email) {
         //     return new Promise((resolve, reject) => {
         //       $.ajax({
@@ -1545,34 +1523,6 @@
         //       });
         //     });
         //   }
-
-        function checkEmailExists(email) {
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                    url: 'https://pda.atksrv.net:3300/api/users/check-email',
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    headers: {
-                        'X-API-Key': 'pdaxatk'
-                    },
-                    data: JSON.stringify({
-                        email: email
-                    }),
-                    success: function(result) {
-                        if (result.success && result.data && result.data.status === 1) {
-                            resolve(true); // Email exists
-                        } else {
-                            resolve(false); // Email available
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error checking email:', error);
-                        reject(error);
-                    }
-                });
-            });
-        }
     </script>
 
 
