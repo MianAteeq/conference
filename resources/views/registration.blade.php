@@ -1383,7 +1383,7 @@
             let promo = document.getElementById("promoCode").value.trim().toUpperCase();
             let discount = 0;
 
-            if (promo === "PADS×PDA10" || promo === "PADSPDA10" || promo === "PADS×PDA10".toUpperCase()) {
+            if (promo === "PADSxPDA10"  || promo === "PADSxPDA10".toUpperCase()) {
                 discount = total * 0.10; // 10% discount
                 total = total - discount;
 
