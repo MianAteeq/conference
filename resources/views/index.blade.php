@@ -386,7 +386,7 @@
   <div class="col col-sm-12 submit-col">
     <span class="btn events-theme-btn-red">
       <i class="fa fa-download" aria-hidden="true"></i>
-      Download Scientific Program
+      Download  Program
     </span>
   </div>
 </a>
