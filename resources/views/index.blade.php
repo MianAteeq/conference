@@ -375,12 +375,12 @@
         <section class="event-schedules section-padding" id="schedules">
     <div class="container">
         <div class="row events-section-title">
-            <h2>Event Schedules</h2>
+            <h2>SCIENTIFIC PROGRAM</h2>
         </div> <!-- end section-title -->
 
         <div class="row">
             <div class="col col-xs-12">
-                <div class="event-schedules-content">
+                <div class="event-schedules-content" style="display:none;">
                     <ul class="tab-list">
                         <li class="active">
                             <a href="#tab-pre" data-toggle="tab">
@@ -409,7 +409,7 @@
                         </li>
                     </ul>
 
-                  <div class="tab-content">
+                  <div class="tab-content" style="display:none;">
 
 <!-- ========================================================= -->
 <!-- ====================  DAY 1 — DEC 26  ==================== -->
