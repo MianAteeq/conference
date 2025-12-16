@@ -79,6 +79,9 @@
     color: #000;
     font-size: 14px;
 }
+    .section-padding {
+    padding: 70px 0;
+}
 </style>
 
 <body>
