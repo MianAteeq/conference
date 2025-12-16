@@ -374,9 +374,11 @@
         <!-- start event-schedules -->
         <section class="event-schedules section-padding" id="schedules">
     <div class="container">
-        <div class="row events-section-title">
-            <h2>Scientific Programs</h2>
-        </div> <!-- end section-title -->
+      
+
+        <div class="row section-title-s2">
+                  <h2 style="text-align: justify;line-height: 1.5;">Scientific Programs</h2>
+               </div>
 
         <div class="row">
             <div class="col col-xs-12">
