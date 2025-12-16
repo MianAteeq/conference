@@ -380,7 +380,7 @@
 
         <div class="row">
             <div class="col col-xs-12">
-               <a class="form row" 
+               <a class="form row" style="text-align: center;"
    target="_blank" 
    href="https://conference.fissionmonster.com/PDA_2025_Scientific_Program.pdf">
   <div class="col col-sm-12 submit-col">
