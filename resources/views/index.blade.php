@@ -380,6 +380,12 @@
 
         <div class="row">
             <div class="col col-xs-12">
+                <a class="form row" target="_blank" href="https://conference.fissionmonster.com/PDA_2025_Scientific_Program.pdf" >
+
+                            <div class="col col-sm-12 submit-col">
+                                <button type="submit" class="btn events-theme-btn-red">Register now</button>
+                            </div>
+                        </a>
                 <div class="event-schedules-content" style="display:none;">
                     <ul class="tab-list">
                         <li class="active">
