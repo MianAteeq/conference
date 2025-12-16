@@ -375,17 +375,22 @@
         <section class="event-schedules section-padding" id="schedules">
     <div class="container">
         <div class="row events-section-title">
-            <h2>SCIENTIFIC PROGRAM</h2>
+            <h2>Scientific Programs</h2>
         </div> <!-- end section-title -->
 
         <div class="row">
             <div class="col col-xs-12">
-                <a class="form row" target="_blank" href="https://conference.fissionmonster.com/PDA_2025_Scientific_Program.pdf" >
+               <a class="form row" 
+   target="_blank" 
+   href="https://conference.fissionmonster.com/PDA_2025_Scientific_Program.pdf">
+  <div class="col col-sm-12 submit-col">
+    <span class="btn events-theme-btn-red">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      Download Scientific Program
+    </span>
+  </div>
+</a>
 
-                            <div class="col col-sm-12 submit-col">
-                                <button type="submit" class="btn events-theme-btn-red">Register now</button>
-                            </div>
-                        </a>
                 <div class="event-schedules-content" style="display:none;">
                     <ul class="tab-list">
                         <li class="active">
