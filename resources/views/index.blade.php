@@ -214,7 +214,7 @@
         <section class="event-speakers section-padding" id="speakers">
             <div class="container">
                 <div class="row events-section-title">
-                    <h2>Event speakers</h2>
+                    <h2>Conference speakers</h2>
                 </div> <!-- end section-title -->
 
                 <div class="row">
