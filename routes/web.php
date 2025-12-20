@@ -164,18 +164,7 @@ Route::get('/test', function () {
 
 
 
-$response = Http::withHeaders([
-    'X-API-Key' => 'pdaxatk',
-    'Accept' => 'application/json',
-    'Content-Type' => 'application/json',
-    'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjcsImVtYWlsIjoiYXRlZXFhZHJlZXNAZmlzaW9ubW9zdGVycy5jIiwibmFtZSI6IkpvaG4gRG9lIiwiZXZlbnRJZCI6MSwidW5pcXVlQ29kZSI6Ik5FMTUyWk9PNFYiLCJpYXQiOjE3NjM1NDA2MzgsImV4cCI6MTc2MzYyNzAzOH0.2VbubzHsMCWcckJ_lafM3DnwGW8zFAYtoXb4jA5DFyU'
-])->post('https://n10n.fissionmonster.com/webhook/44029bbe-10c3-493c-baae-fc207c63af05', [
-    'uniqueCode' => 'NE152ZOO4V',
-    'token'=>'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjcsImVtYWlsIjoiYXRlZXFhZHJlZXNAZmlzaW9ubW9zdGVycy5jIiwibmFtZSI6IkpvaG4gRG9lIiwiZXZlbnRJZCI6MSwidW5pcXVlQ29kZSI6Ik5FMTUyWk9PNFYiLCJpYXQiOjE3NjM1NDA2MzgsImV4cCI6MTc2MzYyNzAzOH0.2VbubzHsMCWcckJ_lafM3DnwGW8zFAYtoXb4jA5DFyU'
-]);
-
-// Get JSON response
-$data = $response->json();
+$data=ConferenceRegister::where('discount','>',0)->get();
 
 dd($data); // dump the response
 })->name('home.test');
