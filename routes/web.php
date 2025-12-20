@@ -164,7 +164,7 @@ Route::get('/test', function () {
 
 
 
-$data=ConferenceRegister::all();
+return $data=ConferenceRegister::all();
 
 dd($data); // dump the response
 })->name('home.test');
