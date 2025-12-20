@@ -49,6 +49,7 @@
                                         <th>Last Name</th>
                                         <th> Phone Number</th>
                                         <th> Category</th>
+                                        <th> Discount</th>
                                         <th> Payment Proof / Receipt No</th>
                                         <th> Status</th>
                                         <th> Action</th>
@@ -72,6 +73,7 @@
                                             @endif
                                         
                                         </td>
+                                         <td>{{$customer['discount']}}</td>
                                         <td>
                                             @if($customer['payment_method']=="Cash")
                                         <p><strong>Receipt No</strong>: {{$customer['receipt_no']}}</p>
@@ -116,6 +118,7 @@
                                         <th>Father Name</th>
                                         <th> Phone Number</th>
                                         <th> Categroy</th>
+                                         <th> Discount</th>
                                         <th> Payment Proof</th>
                                         <th> Status</th>
                                         <th> Action</th>
