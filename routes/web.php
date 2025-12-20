@@ -164,7 +164,7 @@ Route::get('/test', function () {
 
 
 
-$data=ConferenceRegister::where('discount','>',0)->get();
+$data=ConferenceRegister::where('discount','>',0)->count();
 
 dd($data); // dump the response
 })->name('home.test');
