@@ -892,7 +892,7 @@
                             </div>
                             <div class="details" style="height: 86px;">
                                 <h3>Dr. Syed Faizan </h3>
-                                <span>Beyond technical excellence 
+                                <span>Beyond technical excellence
                                 </span>
                             </div>
                         </div>

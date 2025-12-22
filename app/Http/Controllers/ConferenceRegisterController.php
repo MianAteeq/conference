@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
-use App\Models\Contact; 
+use App\Models\Contact;
 use App\Models\RegisterType;
 
 use GuzzleHttp\Client;
@@ -24,53 +24,53 @@ class ConferenceRegisterController extends Controller
     //
 
 
-public function contactStore(Request $request)
-{
-    $request->validate([
-        'first_name' => 'required|string|max:255',
-        'last_name'  => 'required|string|max:255',
-        'email'      => 'required|email|max:255',
-        'phone'      => 'required|string|max:20',
-        'message'    => 'required|string',
-    ]);
+    public function contactStore(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|email|max:255',
+            'phone'      => 'required|string|max:20',
+            'message'    => 'required|string',
+        ]);
 
-    // Optional: save to DB
-    Contact::create($request->all());
+        // Optional: save to DB
+        Contact::create($request->all());
 
-    // Optional: send email
-    // Mail::raw("New contact form submission:\n\n{$request->message}", function ($mail) use ($request) {
-    //     $mail->to('your@email.com')
-    //          ->subject('New Contact Form Submission from ' . $request->first_name);
-    // });
+        // Optional: send email
+        // Mail::raw("New contact form submission:\n\n{$request->message}", function ($mail) use ($request) {
+        //     $mail->to('your@email.com')
+        //          ->subject('New Contact Form Submission from ' . $request->first_name);
+        // });
 
-    return back()->with('success', 'Thank you for contacting us! We will get back to you soon.');
-}
+        return back()->with('success', 'Thank you for contacting us! We will get back to you soon.');
+    }
 
     public function submit(Request $request)
     {
 
         $registrationType = $request->has('workshop_id') && !empty($request->workshop_id)
-    ? 'workshop'
-    : 'conference';
+            ? 'workshop'
+            : 'conference';
 
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             // 'father_name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:255'],
             // 'cnic_passport' => ['required', 'string', 'max:255','unique:'.ConferenceRegister::class],
-           'email' => [
-        'required',
-        'string',
-        'lowercase',
-        'email',
-        'max:255',
-        Rule::unique('conference_registers', 'email')
-            ->where(function ($query) use ($registrationType) {
-                $query->where('status', '!=', 'REJECTED')
-                      ->where('registration_type', $registrationType);
-            }),
-    ],
-    'file.*' => ['required', 'image', 'max:10048'],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                Rule::unique('conference_registers', 'email')
+                    ->where(function ($query) use ($registrationType) {
+                        $query->where('status', '!=', 'REJECTED')
+                            ->where('registration_type', $registrationType);
+                    }),
+            ],
+            'file.*' => ['required', 'image', 'max:10048'],
 
 
         ]);
@@ -112,22 +112,19 @@ public function contactStore(Request $request)
                 }
             }
         }
-        
+
         $register_type = RegisterType::find($request->category)->price;
-        
+
         // Default discount
         $discount = 0;
-        
+
+        // return $request->all();
+
         // Check promo code (case insensitive)
-        if (!empty($request->promoCode)) {
-            $promo = strtoupper(trim($request->promoCode));
-        
-            if ($promo === 'PADS×PDA10' || $promo === 'PADSPDA10') {
-                $discount = $register_type * 0.10;  // 10% discount
-            }
-        }
-        
-    
+        $discount = (!empty($request->promoCode) && strcasecmp(trim($request->promoCode), 'PADSxPDA10') === 0) ? $register_type * 0.10 : 0;
+
+
+
 
 
 
@@ -157,25 +154,25 @@ public function contactStore(Request $request)
 
         ]);
 
-            // foreach ($request['file'] as $key => $file) {
+        // foreach ($request['file'] as $key => $file) {
         if (isset($request['file'])) {
-                $image = $request['file'];
+            $image = $request['file'];
 
-                $filename = time() . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            $filename = time() . Str::random(10) . '.' . $image->getClientOriginalExtension();
 
 
-                $path = public_path('uploads/' . $filename);
+            $path = public_path('uploads/' . $filename);
 
-                $file_path = 'uploads/' . $filename;
+            $file_path = 'uploads/' . $filename;
 
-                Image::make($image->getRealPath())->save($path);
+            Image::make($image->getRealPath())->save($path);
 
-                ConferenceImage::create([
+            ConferenceImage::create([
 
-                    'conference_id' => $conference['id'],
-                    'image' => $file_path
-                ]);
-            }
+                'conference_id' => $conference['id'],
+                'image' => $file_path
+            ]);
+        }
         // }
 
         if (isset($request['workshop_id'])) {
@@ -189,46 +186,46 @@ public function contactStore(Request $request)
                 ]);
             }
         }
-        
-         $mailData = [
-        'first_name'    => $conference->name,
-        'father_name'    => $conference->father_name,
-        'email'         => $conference->email,
-        'phone_number'  => $conference->phone_number,
-    ];
 
-    Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
-        $message->to($conference->email)
+        $mailData = [
+            'first_name'    => $conference->name,
+            'father_name'    => $conference->father_name,
+            'email'         => $conference->email,
+            'phone_number'  => $conference->phone_number,
+        ];
+
+        Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
+            $message->to($conference->email)
                 ->subject('Thank You for Registering – PDA Conference');
-    });
-    
-    $phone =  $conference['phone_number'];
-    // $phone =  "+923302345699";
-    $text = "Dear {$conference['name']},\n\n"
-      . "Thank you for registering for the Pakistan Dental Association 14th International & 34th National Dental Conference.\n\n"
-      . "Your registration has been successfully received and is currently under review by our verification team."
-      . "You will receive a confirmation message once your registration and payment (if applicable) have been verified.\n\n"
-     
-      . "Best regards,\nPakistan Dental Association";
+        });
 
-$response = $this->sendMessage($phone, $text);
+        $phone =  $conference['phone_number'];
+        // $phone =  "+923302345699";
+        $text = "Dear {$conference['name']},\n\n"
+            . "Thank you for registering for the Pakistan Dental Association 14th International & 34th National Dental Conference.\n\n"
+            . "Your registration has been successfully received and is currently under review by our verification team."
+            . "You will receive a confirmation message once your registration and payment (if applicable) have been verified.\n\n"
+
+            . "Best regards,\nPakistan Dental Association";
+
+        $response = $this->sendMessage($phone, $text);
 
 
 
         session()->flash('success', 'Conference Register  Successfully !');
 
-       return redirect()->route('success.page')
-        ->with('success', 'Registration Successful!')
-    ->with('user', [
-        'registration_no' => 'PDA-2025-' . rand(1000,9999),
-        'name' => $conference->name .' ' . $conference->father_name,
-        'email' => $conference->email,
-        'phone' => $conference->phone_number,
-        'cat' => $conference['cat'],
-        'workshops' => $conference['workshops'],
-        'payment_method' => 'Bank Transfer',
-        'images' => $conference['images']
-    ]);
+        return redirect()->route('success.page')
+            ->with('success', 'Registration Successful!')
+            ->with('user', [
+                'registration_no' => 'PDA-2025-' . rand(1000, 9999),
+                'name' => $conference->name . ' ' . $conference->father_name,
+                'email' => $conference->email,
+                'phone' => $conference->phone_number,
+                'cat' => $conference['cat'],
+                'workshops' => $conference['workshops'],
+                'payment_method' => 'Bank Transfer',
+                'images' => $conference['images']
+            ]);
     }
 
 
@@ -289,23 +286,23 @@ $response = $this->sendMessage($phone, $text);
         readfile($file_name);
         unlink($file_name);
     }
-    
+
     public function store(Request $request)
-{
-    // return $request;
-    // $request->validate([
-    //     'email' => 'required|email|unique:subscribers,email',
-    // ]);
+    {
+        // return $request;
+        // $request->validate([
+        //     'email' => 'required|email|unique:subscribers,email',
+        // ]);
 
-    Subscriber::create([
-        'email' => $request->email,
-    ]);
-    session()->flash('message', 'Thank you for subscribing!');
+        Subscriber::create([
+            'email' => $request->email,
+        ]);
+        session()->flash('message', 'Thank you for subscribing!');
 
-    return back()->with('message', 'Thank you for subscribing!');
-}
+        return back()->with('message', 'Thank you for subscribing!');
+    }
 
-   public function sendMessage($to, $message)
+    public function sendMessage($to, $message)
     {
         $apiKey = env('WA_KEY');
         $url = 'https://www.wasenderapi.com/api/send-message';
@@ -326,7 +323,6 @@ $response = $this->sendMessage($phone, $text);
             ]);
 
             return json_decode($response->getBody(), true);
-
         } catch (RequestException $e) {
             return [
                 'error' => true,
@@ -334,5 +330,4 @@ $response = $this->sendMessage($phone, $text);
             ];
         }
     }
-
 }

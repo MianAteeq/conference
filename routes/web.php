@@ -16,7 +16,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\ConferenceRegisterController;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-   use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ Route::get('/register', function () {
 
 
 
-  $types = RegisterType::whereDate('start_date', '>=', '2025-12-01')->whereDate('end_date', '<=', '2025-12-31')->where('type', 'Conference')->orderBy('order_no', 'asc')->get();
+    $types = RegisterType::whereDate('start_date', '>=', '2025-12-01')->whereDate('end_date', '<=', '2025-12-31')->where('type', 'Conference')->orderBy('order_no', 'asc')->get();
     $types_shops = RegisterType::whereDate('start_date', '>=', '2025-12-01')->whereDate('end_date', '<=', '2025-12-31')->where('type', 'Workshop')->orderBy('order_no', 'asc')->get();
     $types_packages = RegisterType::where('type', 'Package')->orderBy('order_no', 'desc')->get();
     $types_categories = RegisterType::where('type', 'Category')->orderBy('order_no', 'asc')->get();
@@ -111,8 +111,8 @@ Route::post('/upload/data', function (Request $request) {
 Route::post('conference/register', [ConferenceRegisterController::class, 'submit'])->name('register')->middleware('throttle:5,1');;
 Route::post('/subscribe', [ConferenceRegisterController::class, 'store'])
     ->name('subscribe.store');
-    
-    Route::post('/contact', [ConferenceRegisterController::class, 'contactStore'])->name('contact.submit');
+
+Route::post('/contact', [ConferenceRegisterController::class, 'contactStore'])->name('contact.submit');
 
 
 Route::get('our_backup_database', [ConferenceRegisterController::class, 'our_backup_database'])->name('our_backup_database');
@@ -164,7 +164,32 @@ Route::get('/test', function () {
 
 
 
-return $data=ConferenceRegister::all();
+    return $data = ConferenceRegister::all();
 
-dd($data); // dump the response
+    dd($data); // dump the response
 })->name('home.test');
+
+Route::get('/update/discount/{id}', function ($id) {
+
+
+
+    $data = ConferenceRegister::find($id);
+
+    $register_type = RegisterType::find($data->category)->price;
+
+    // Default discount
+    $discount = 0;
+
+    // return $request->all();
+
+    // Check promo code (case insensitive)
+    $discount = $register_type * 0.10;
+
+    ConferenceRegister::find($id)->update([
+        'discount' => $discount,
+    ]);
+
+
+
+    dd($data); // dump the response
+})->name('home.test.update.discount');
