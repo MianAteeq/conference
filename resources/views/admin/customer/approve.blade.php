@@ -210,9 +210,8 @@
     <script src="/admin-assets/app-assets/vendors/js/tables/buttons.print.min.js"></script>
 
 
-    <script src="/admin-assets/app-assets/js/scripts/tables/datatables/datatable-advanced.js"></script>
 
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    {{-- <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> --}}
     <script type="text/javascript" src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
 
     <script>
@@ -238,4 +237,5 @@
 
         }
     </script>
+    <script src="/admin-assets/app-assets/js/scripts/tables/datatables/datatable-advanced.js"></script>
 @endsection
