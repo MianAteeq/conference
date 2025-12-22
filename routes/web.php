@@ -55,6 +55,18 @@ Route::get('/register', function () {
 
     return view('registration', get_defined_vars());
 })->name('register.page');
+Route::get('/register/test', function () {
+
+
+
+    $types = RegisterType::whereDate('start_date', '>=', '2025-8-01')->whereDate('end_date', '<=', '2025-12-31')->where('type', 'Conference')->orderBy('order_no', 'asc')->get();
+    $types_shops = RegisterType::whereDate('start_date', '>=', '2025-8-01')->whereDate('end_date', '<=', '2025-12-31')->where('type', 'Workshop')->orderBy('order_no', 'asc')->get();
+    $types_packages = RegisterType::where('type', 'Package')->orderBy('order_no', 'desc')->get();
+    $types_categories = RegisterType::where('type', 'Category')->orderBy('order_no', 'asc')->get();
+    $types_awards = RegisterType::where('type', 'Awards')->orderBy('order_no', 'asc')->get();
+
+    return view('registration', get_defined_vars());
+})->name('register.page');
 
 Route::get('/success/page', function () {
 
