@@ -177,6 +177,11 @@ Route::get('/update/discount/{id}', function ($id) {
 
     $register_type = RegisterType::find($data->category)->price;
 
+    if ($data['accompanying_count'] > 0) {
+
+        $register_type += $data['accompanying_count'] * 5000;
+    }
+
     // Default discount
     $discount = 0;
 
