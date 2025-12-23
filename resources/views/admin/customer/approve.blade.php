@@ -135,7 +135,18 @@
                                                 <td>{{ $customer['name'] }} </td>
                                                 <td>{{ $customer['father_name'] }} </td>
                                                 <td>{{ $customer['phone_number'] }}</td>
-                                                <td>{{ $customer['cat']['name'] }}</td>
+                                                <td>
+                                                    {{ $customer['cat']['name'] ?? 'N/A' }} -
+                                                    Rs{{ $customer['cat']['price'] ?? 0 }}
+                                                    @if ($customer['accompanying_count'] > 0)
+                                                        <p>Accompanying Persons X {{ $customer['accompanying_count'] }} =
+                                                            Rs {{ $customer['accompanying_count'] * 5000 }}</p>
+                                                        <p>Total
+                                                            <strong>{{ $customer['cat']['price'] + $customer['accompanying_count'] * 5000 ?? 0 }}</strong>
+                                                        </p>
+                                                    @endif
+
+                                                </td>
                                                 <td>
                                                     @if (!empty($customer['accompanying']) && json_decode($customer['accompanying']))
                                                         @foreach (json_decode($customer['accompanying']) as $data)
