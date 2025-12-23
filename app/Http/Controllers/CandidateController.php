@@ -203,6 +203,7 @@ class CandidateController extends Controller
             ];
         }
         $total = 0;
+        $total_discount = 0;
 
         foreach ($candidates as $candidate) {
 
@@ -214,6 +215,7 @@ class CandidateController extends Controller
 
             // deduct candidate discount
             $candidateTotal -= ($candidate['discount'] ?? 0);
+            $total_discount += ($candidate['discount'] ?? 0);
 
             $total += $candidateTotal;
         }
@@ -611,6 +613,7 @@ class CandidateController extends Controller
 
         $data = ConferenceRegister::with('type')->find($id);
         $total = 0;
+
         $total = $data['cat']['price'];
 
         if ($candidate['accompanying_count'] > 0) {

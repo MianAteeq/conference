@@ -56,6 +56,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="card pull-up">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex">
+                                <div class="media-body text-left">
+                                    <h3 class="success">{{ number_format($total_discount, 2) }}</h3>
+                                    <h6>Total Discount</h6>
+                                </div>
+                                <div>
+                                    <i class="icon-pie-chart success font-large-2 float-right"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-xl-9 col-lg-9 col-12">
                 <div class="card pull-up">
