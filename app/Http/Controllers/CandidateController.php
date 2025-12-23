@@ -209,9 +209,9 @@ class CandidateController extends Controller
 
             $candidateTotal = getTotalValue($candidate['workshops'], $candidate);
 
-            if ($candidate['accompanying_count'] > 0) {
-                $candidateTotal += $candidate['accompanying_count'] * 5000;
-            }
+            // if ($candidate['accompanying_count'] > 0) {
+            //     $candidateTotal += $candidate['accompanying_count'] * 5000;
+            // }
 
             // deduct candidate discount
             $candidateTotal -= ($candidate['discount'] ?? 0);
