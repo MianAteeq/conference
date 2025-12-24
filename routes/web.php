@@ -196,7 +196,7 @@ Route::get('/update/discount/{id}', function ($id) {
     ];
 
     Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
-        $message->to($conference->email)
+        $message->to('ateeqadrees83@gmail.com')
             ->subject('Thank You for Registering – PDA Conference');
     });
 })->name('home.test.update.discount');
