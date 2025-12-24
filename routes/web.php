@@ -187,10 +187,7 @@ Route::get('/update/discount/{id}', function ($id) {
 
 
     $conference = ConferenceRegister::find($id)->update([
-        'name' => 'SABAH',
-        'father_name' => 'AA',
-        'email' => 'khizrakhurram23@gmail.com',
-        'phone_number' => '923054058863',
+        'phone_number' => '923261308479',
     ]);
     return ConferenceRegister::find($id);
 })->name('home.test.update.discount');
