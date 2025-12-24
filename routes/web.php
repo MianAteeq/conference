@@ -191,5 +191,5 @@ Route::get('/update/discount/{id}', function ($id) {
         'email' => 'khizrakhurram23@gmail.com',
         'phone_number' => '923054058863',
     ]);
-    return 1;
+    return ConferenceRegister::find($id);
 })->name('home.test.update.discount');
