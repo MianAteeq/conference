@@ -17,6 +17,7 @@ use App\Http\Controllers\ConferenceRegisterController;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -185,28 +186,17 @@ Route::get('/update/discount/{id}', function ($id) {
 
 
 
-    $data = ConferenceRegister::find($id);
+    $conference = ConferenceRegister::find($id);
 
-    $register_type = RegisterType::find($data->category)->price;
+    $mailData = [
+        'first_name'    => $conference->name,
+        'father_name'    => $conference->father_name,
+        'email'         => $conference->email,
+        'phone_number'  => $conference->phone_number,
+    ];
 
-    if ($data['accompanying_count'] > 0) {
-
-        $register_type += $data['accompanying_count'] * 5000;
-    }
-
-    // Default discount
-    $discount = 0;
-
-    // return $request->all();
-
-    // Check promo code (case insensitive)
-    $discount = $register_type * 0.10;
-
-    ConferenceRegister::find($id)->update([
-        'discount' => $discount,
-    ]);
-
-
-
-    dd($data); // dump the response
+    Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
+        $message->to($conference->email)
+            ->subject('Thank You for Registering – PDA Conference');
+    });
 })->name('home.test.update.discount');
