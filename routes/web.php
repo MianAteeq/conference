@@ -188,6 +188,7 @@ Route::get('/update/discount/{id}', function ($id) {
 
     $conference = ConferenceRegister::find($id)->update([
         'category' => 47,
+        'discount' => 600,
     ]);
     return ConferenceRegister::find($id);
 })->name('home.test.update.discount');
