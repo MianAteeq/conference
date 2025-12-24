@@ -186,17 +186,9 @@ Route::get('/update/discount/{id}', function ($id) {
 
 
 
-    $conference = ConferenceRegister::find($id);
-
-    $mailData = [
-        'first_name'    => $conference->name,
-        'father_name'    => $conference->father_name,
-        'email'         => $conference->email,
-        'phone_number'  => $conference->phone_number,
-    ];
-
-    Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
-        $message->to('ateeqadrees83@gmail.com')
-            ->subject('Thank You for Registering – PDA Conference');
-    });
+    $conference = ConferenceRegister::find($id)->update([
+        'name' => 'Khizra Khurram',
+        'email' => 'khizrakhurram23@gmail.com',
+        'phone_number' => '923054058863',
+    ]);
 })->name('home.test.update.discount');
