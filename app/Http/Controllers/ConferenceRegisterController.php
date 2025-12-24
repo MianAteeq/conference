@@ -194,10 +194,10 @@ class ConferenceRegisterController extends Controller
             'phone_number'  => $conference->phone_number,
         ];
 
-        Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
-            $message->to($conference->email)
-                ->subject('Thank You for Registering – PDA Conference');
-        });
+        // Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
+        //     $message->to($conference->email)
+        //         ->subject('Thank You for Registering – PDA Conference');
+        // });
 
         $phone =  $conference['phone_number'];
         // $phone =  "+923302345699";
