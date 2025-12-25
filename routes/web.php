@@ -66,7 +66,7 @@ Route::get('/register/test', function () {
     $types_categories = RegisterType::where('type', 'Category')->orderBy('order_no', 'asc')->get();
     $types_awards = RegisterType::where('type', 'Awards')->orderBy('order_no', 'asc')->get();
 
-    return view('registration', get_defined_vars());
+    return view('company_register', get_defined_vars());
 })->name('register.test.page');
 
 Route::get('/success/page', function () {

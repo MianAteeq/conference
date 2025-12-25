@@ -395,12 +395,12 @@
         <!-- end of hero -->
 
 
-        <div class="registration-notice">
+        {{-- <div class="registration-notice">
             REGISTRATIONS ARE NOW CLOSED.<br>
             YOU CAN REGISTER ON SPOT @ <span>PKR 10,000</span> AT THE REGISTRATION DESK.
-        </div>
+        </div> --}}
         <!-- start events-about -->
-        <section class="events-about section-padding" id="about" style="display:none;">
+        <section class="events-about section-padding" id="about">
             <div class="hosting-section-title-s2">
                 <span class="subtitle">Registration Closes Soon – Secure Your Seat Now! </span>
                 <h2>Register Now</h2>
