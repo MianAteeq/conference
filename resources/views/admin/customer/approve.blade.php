@@ -112,7 +112,8 @@
                                             <th>Institue</th>
                                             <th> Name</th>
                                             <th>Father Name</th>
-                                            <th> Phone Number</th>
+                                            <th>Phone Number</th>
+                                            <th>Email</th>
                                             <th> Category</th>
                                             <th> Accompanying Person</th>
                                             <th> Payment Method</th>
@@ -135,6 +136,7 @@
                                                 <td>{{ $customer['name'] }} </td>
                                                 <td>{{ $customer['father_name'] }} </td>
                                                 <td>{{ $customer['phone_number'] }}</td>
+                                                <td>{{ $customer['email'] }}</td>
                                                 <td>
                                                     {{ $customer['cat']['name'] ?? 'N/A' }} -
                                                     Rs{{ $customer['cat']['price'] ?? 0 }}
@@ -204,6 +206,7 @@
                                             <th> Name</th>
                                             <th>Father Name</th>
                                             <th> Phone Number</th>
+                                            <th>Email</th>
                                             <th> Category</th>
                                             <th> Accompanying Person</th>
                                             <th> Payment Method</th>
