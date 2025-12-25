@@ -302,6 +302,27 @@
     }
 </style>
 
+<style>
+    .registration-notice {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 20px 25px;
+        border-radius: 8px;
+        background: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .registration-notice span {
+        color: #c82333;
+        font-weight: 700;
+    }
+</style>
+
 <body>
 
     <!-- start page-wrapper -->
@@ -374,8 +395,12 @@
         <!-- end of hero -->
 
 
+        <div class="registration-notice">
+            REGISTRATIONS ARE NOW CLOSED.<br>
+            YOU CAN REGISTER ON SPOT @ <span>PKR 10,000</span> AT THE REGISTRATION DESK.
+        </div>
         <!-- start events-about -->
-        <section class="events-about section-padding" id="about">
+        <section class="events-about section-padding" id="about" style="display:none;">
             <div class="hosting-section-title-s2">
                 <span class="subtitle">Registration Closes Soon – Secure Your Seat Now! </span>
                 <h2>Register Now</h2>
@@ -1383,7 +1408,7 @@
             let promo = document.getElementById("promoCode").value.trim().toUpperCase();
             let discount = 0;
 
-            if (promo === "PADSxPDA10"  || promo === "PADSxPDA10".toUpperCase()) {
+            if (promo === "PADSxPDA10" || promo === "PADSxPDA10".toUpperCase()) {
                 discount = total * 0.10; // 10% discount
                 total = total - discount;
 
