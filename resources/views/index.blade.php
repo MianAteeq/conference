@@ -893,7 +893,7 @@
                 <div class="row">
                     <div class="col col-xs-12">
                         <a class="form row" style="text-align: center;" target="_blank"
-                            href="https://conference.fissionmonster.com/PDA_2025_Scientific_Program.pdf">
+                            href="https://conference.fissionmonster.com/PDA2025ScientificProgram.pdf">
                             <div class="col col-sm-12 submit-col">
                                 <span class="btn events-theme-btn-red">
                                     <i class="fa fa-download" aria-hidden="true"></i>
