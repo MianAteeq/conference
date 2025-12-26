@@ -187,28 +187,28 @@ class ConferenceRegisterController extends Controller
             }
         }
 
-        $mailData = [
-            'first_name'    => $conference->name,
-            'father_name'    => $conference->father_name,
-            'email'         => $conference->email,
-            'phone_number'  => $conference->phone_number,
-        ];
+        // $mailData = [
+        //     'first_name'    => $conference->name,
+        //     'father_name'    => $conference->father_name,
+        //     'email'         => $conference->email,
+        //     'phone_number'  => $conference->phone_number,
+        // ];
 
-        Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
-            $message->to($conference->email)
-                ->subject('Thank You for Registering – PDA Conference');
-        });
+        // Mail::send('mail.conference_thankyou', $mailData, function ($message) use ($conference) {
+        //     $message->to($conference->email)
+        //         ->subject('Thank You for Registering – PDA Conference');
+        // });
 
-        $phone =  $conference['phone_number'];
-        // $phone =  "+923302345699";
-        $text = "Dear {$conference['name']},\n\n"
-            . "Thank you for registering for the Pakistan Dental Association 14th International & 34th National Dental Conference.\n\n"
-            . "Your registration has been successfully received and is currently under review by our verification team."
-            . "You will receive a confirmation message once your registration and payment (if applicable) have been verified.\n\n"
+        // $phone =  $conference['phone_number'];
+        // // $phone =  "+923302345699";
+        // $text = "Dear {$conference['name']},\n\n"
+        //     . "Thank you for registering for the Pakistan Dental Association 14th International & 34th National Dental Conference.\n\n"
+        //     . "Your registration has been successfully received and is currently under review by our verification team."
+        //     . "You will receive a confirmation message once your registration and payment (if applicable) have been verified.\n\n"
 
-            . "Best regards,\nPakistan Dental Association";
+        //     . "Best regards,\nPakistan Dental Association";
 
-        $response = $this->sendMessage($phone, $text);
+        // $response = $this->sendMessage($phone, $text);
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\UserCredentialsMail;
 use id;
 use App\Models\ConferenceWorkshop;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Mail;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ConferenceRegister extends Model
 {
@@ -62,23 +65,46 @@ class ConferenceRegister extends Model
     }
 
     public function getPrefixAttribute($value)
-            {
-                if($value=="null"){
+    {
+        if ($value == "null") {
 
-                    return  ;
-                }else{
-                    return  $value;
+            return;
+        } else {
+            return  $value;
+        }
+    }
 
-                }
-            }
+    /**
+     * Get all of the comments for the ConferenceRegister
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function workshops(): HasMany
+    {
+        return $this->hasMany(ConferenceWorkshop::class, 'conference_id', 'id');
+    }
 
-            /**
-             * Get all of the comments for the ConferenceRegister
-             *
-             * @return \Illuminate\Database\Eloquent\Relations\HasMany
-             */
-            public function workshops(): HasMany
-            {
-                return $this->hasMany(ConferenceWorkshop::class, 'conference_id', 'id');
-            }
+    public function sendEmails()
+    {
+        $spreadsheet = IOFactory::load(storage_path('users.xlsx'));
+        $sheet = $spreadsheet->getActiveSheet();
+        $rows = $sheet->toArray();
+
+        unset($rows[0]); // remove header
+
+        foreach ($rows as $row) {
+
+            $user = [
+                'name' => $row[0],
+                'email' => $row[1],
+                'password' => $row[2],
+            ];
+
+            Mail::to($user['email'])
+                ->queue(new UserCredentialsMail($user)); // ✅ QUEUED
+        }
+
+
+        return "Emails Sent Successfully!";
+    }
 }

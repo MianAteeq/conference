@@ -192,3 +192,5 @@ Route::get('/update/discount/{id}', function ($id) {
     ]);
     return ConferenceRegister::find($id);
 })->name('home.test.update.discount');
+
+Route::get('/send-user-emails', [ConferenceRegister::class, 'sendEmails']);
