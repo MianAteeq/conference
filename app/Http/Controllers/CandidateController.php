@@ -190,7 +190,15 @@ class CandidateController extends Controller
     {
 
 
-        $candidates = ConferenceRegister::where('registration_type', '!=', 'Workshop')->orderBy('cn_register_no', 'asc')->where('status', 'APPROVE')->get();
+        // $candidates = ConferenceRegister::where('registration_type', '!=', 'Workshop')->orderBy('cn_register_no', 'asc')->where('status', 'APPROVE')->get();
+
+        $lastFriday = Carbon::now()->previous(Carbon::FRIDAY)->startOfDay();
+
+        $candidates = ConferenceRegister::where('registration_type', '!=', 'Workshop')
+            ->where('status', 'APPROVE')
+            ->where('created_at', '>=', $lastFriday)
+            ->orderBy('cn_register_no', 'asc')
+            ->get();
 
         $institutes = ConferenceRegister::where('registration_type', 'Conference')->where('status', 'APPROVE')->get()->groupBy('institution');
 
