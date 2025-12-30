@@ -115,6 +115,7 @@
                                             <th>Phone Number</th>
                                             <th>Email</th>
                                             <th> Category</th>
+                                            <th> Discount</th>
                                             <th> Accompanying Person</th>
                                             <th> Payment Method</th>
 
@@ -138,7 +139,7 @@
                                                 <td>{{ $customer['phone_number'] }}</td>
                                                 <td>{{ $customer['email'] }}</td>
                                                 <td>
-                                                    {{ $customer['cat']['name'] ?? 'N/A' }} -
+
                                                     Rs{{ $customer['cat']['price'] ?? 0 }}
                                                     @if ($customer['accompanying_count'] > 0)
                                                         <p>Accompanying Persons X {{ $customer['accompanying_count'] }} =
@@ -149,6 +150,7 @@
                                                     @endif
 
                                                 </td>
+                                                <td>{{ $customer['discount'] }}</td>
                                                 <td>
                                                     @if (!empty($customer['accompanying']) && json_decode($customer['accompanying']))
                                                         @foreach (json_decode($customer['accompanying']) as $data)
@@ -208,6 +210,7 @@
                                             <th> Phone Number</th>
                                             <th>Email</th>
                                             <th> Category</th>
+                                            <th> Discount</th>
                                             <th> Accompanying Person</th>
                                             <th> Payment Method</th>
 
